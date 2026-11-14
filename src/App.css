@@ -1,42 +1,78 @@
-.app {
+.login-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-  color: #ffffff;
+  display: grid;
+  place-items: center;
+  padding: 32px 18px;
+  background: radial-gradient(ellipse at 50% 0%, #211416 0, #0f0f0f 54%);
 }
 
-.app-header {
-  background: linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 100%);
-  padding: 2rem 1rem;
-  text-align: center;
-  border-bottom: 2px solid #ff0000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+.login-wrap { width: min(100%, 440px); }
+
+.brand { margin-bottom: 28px; text-align: center; }
+.brand-mark {
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 15px;
+  border-radius: 15px;
+  background: #e50914;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 800;
+  box-shadow: 0 10px 30px #e5091433;
 }
+.brand h1, .dashboard-header h1 { margin: 0; font-size: 24px; letter-spacing: .04em; }
+.brand h1 span, .dashboard-header h1 span { color: #a6a6a6; }
+.brand p { margin: 7px 0 0; color: #a6a6a6; font-size: 14px; }
 
-.app-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #ff0000;
-  text-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+.login-card {
+  padding: 30px;
+  border: 1px solid #ffffff12;
+  border-radius: 18px;
+  background: #1a1a1a;
+  box-shadow: 0 24px 70px #0008;
 }
-
-.app-header p {
-  font-size: 1.1rem;
-  color: #cccccc;
-  opacity: 0.9;
+.login-form { display: grid; gap: 10px; }
+.login-form label { margin-top: 5px; color: #d1d1d1; font-size: 14px; font-weight: 600; }
+.input-wrap { position: relative; display: flex; align-items: center; }
+.input-wrap input {
+  width: 100%; min-height: 48px; padding: 11px 68px 11px 42px;
+  border: 1px solid #ffffff1a; border-radius: 9px; outline: none;
+  background: #0f0f0f; color: #fff; transition: border-color .2s, box-shadow .2s;
 }
-
-.app-main {
-  max-width: 1400px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.input-wrap input:focus { border-color: #e50914; box-shadow: 0 0 0 3px #e5091426; }
+.input-wrap input::placeholder { color: #737373; }
+.field-icon { position: absolute; left: 15px; color: #777; font-size: 14px; pointer-events: none; }
+.password-toggle { position: absolute; right: 12px; border: 0; background: none; color: #aaa; font-size: 12px; }
+.password-toggle:hover { color: #fff; }
+.form-options { display: flex; justify-content: flex-end; margin: 5px 0 9px; color: #929292; font-size: 12px; }
+.login-button, .logout-button {
+  min-height: 48px; border: 0; border-radius: 9px; background: #e50914; color: #fff;
+  font-weight: 700; transition: background .2s, transform .2s;
 }
+.login-button:hover:not(:disabled), .logout-button:hover { background: #c90812; transform: translateY(-1px); }
+.login-button:disabled { cursor: wait; opacity: .7; }
+.alert { margin-bottom: 18px; padding: 12px; border: 1px solid transparent; border-radius: 9px; text-align: center; font-size: 13px; }
+.alert-error { border-color: #dc354566; background: #dc35451f; color: #ff858d; }
+.alert-warning { border-color: #e5b52666; background: #e5b5261b; color: #f5d774; }
+.alert-success { border-color: #28a74566; background: #28a7451b; color: #77d18a; }
+.login-footer { margin: 18px 4px 0; color: #737373; font-size: 11px; line-height: 1.7; text-align: center; }
+.fade-in { animation: fade-in .3s ease-out both; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
-@media (max-width: 768px) {
-  .app-header h1 {
-    font-size: 1.8rem;
-  }
+.dashboard-shell { min-height: 100vh; background: #0f0f0f; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 20px clamp(18px, 5vw, 64px); border-bottom: 1px solid #ffffff12; background: #1a1a1a; }
+.dashboard-header p { margin: 5px 0 0; color: #999; font-size: 13px; }
+.user-actions { display: flex; align-items: center; gap: 16px; }
+.user-greeting { color: #ccc; font-size: 14px; }
+.logout-button { min-height: 40px; padding: 0 16px; }
+.dashboard-content { width: min(1400px, 100%); margin: 0 auto; padding: 28px clamp(16px, 4vw, 44px); }
 
-  .app-main {
-    margin: 1rem auto;
-  }
+@media (max-width: 520px) {
+  .login-card { padding: 24px 20px; }
+  .brand h1, .dashboard-header h1 { font-size: 20px; }
+  .dashboard-header { align-items: flex-start; }
+  .user-actions { align-items: flex-end; flex-direction: column; gap: 8px; }
 }
