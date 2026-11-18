@@ -1,0 +1,126 @@
+/* Member-facing website theme. Everything is scoped to .site so the admin panel is untouched. */
+.site {
+  --bg: #0c0c0f;
+  --card: #16161b;
+  --text: #f1f1f4;
+  --muted: #8b8b95;
+  --accent: #e11d2a;
+  --border: rgba(241, 241, 244, 0.09);
+  font-family: 'Chakra Petch', 'Noto Sans Thai', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+}
+
+/* keyboard users must always see where the focus is */
+.site :where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@keyframes site-fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes site-kenburns {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.18); }
+}
+
+.site .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: site-fade-up 0.6s ease forwards;
+}
+.site .kb {
+  animation: site-kenburns 18s ease-in-out infinite alternate;
+}
+
+.site .no-scrollbar::-webkit-scrollbar { display: none; }
+.site .no-scrollbar { scrollbar-width: none; }
+
+/* category chips */
+.site .s-chip {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.site .s-chip:hover { color: var(--text); }
+.site .s-chip[aria-pressed='true'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* movie cards */
+.site .s-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.site .s-card:hover,
+.site .s-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 34px rgba(225, 29, 42, 0.22);
+}
+.site .s-card .s-play {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.site .s-card:hover .s-play,
+.site .s-card:focus-visible .s-play {
+  opacity: 1;
+}
+/* touch screens have no hover: show a small play button all the time */
+.site .s-card .s-play-mini { display: none; }
+@media (hover: none) {
+  .site .s-card .s-play-mini { display: flex; }
+}
+
+/* respect "reduce motion": no looping zoom, no slide-in, nothing hidden waiting for an animation */
+@media (prefers-reduced-motion: reduce) {
+  .site .kb { animation: none; }
+  .site .reveal { animation: none; opacity: 1; transform: none; }
+  .site .s-card, .site .s-chip, .site .s-card .s-play { transition: none; }
+  .site .animate-pulse { animation: none; }
+}
+
+/* Bannlai Series reference theme — scoped to the public/member site only. */
+.site {
+  --bg: #fff8fd;
+  --card: #ffffff;
+  --text: #171321;
+  --muted: #777184;
+  --accent: #f01878;
+  --border: rgba(91, 62, 100, .12);
+  background: #fff8fd;
+  color: #171321;
+  font-family: 'Noto Sans Thai', 'Prompt', system-ui, sans-serif;
+}
+.site :where(header, nav) { color: #20172a; }
+.site :where(.bg-\[\#0c0c0f\], .bg-\[\#0f0f12\], .bg-\[\#101014\], .bg-\[\#16161b\], .bg-\[\#171717\], .bg-\[\#1F1F1F\], .bg-\[\#1c1c22\], .bg-\[\#222222\], .bg-\[\#242424\]) {
+  background-color: #fff !important;
+}
+.site :where(.border-white\/5, .border-white\/10, .border-white\/15, .border-\[var\(--border\)\]) { border-color: rgba(91,62,100,.13) !important; }
+.site :where(.text-white, .text-gray-100, .text-gray-200, .text-gray-300) { color: #211a2a !important; }
+.site :where(.text-gray-400, .text-gray-500, .text-gray-600) { color: #81778b !important; }
+.site :where(.bg-\[\#E50914\], .bg-\[var\(--accent\)\]) { background-color: #f01878 !important; }
+.site :where(.text-\[\#E50914\], .text-red-400, .text-red-500) { color: #ed1675 !important; }
+.site :where(.border-red-500, .border-\[\#E50914\]) { border-color: #f01878 !important; }
+.site :where(button, a, input, select) { -webkit-tap-highlight-color: transparent; }
+.site :where(button, .s-chip) { border-radius: 999px; }
+.site header { background: rgba(255,255,255,.94) !important; border-color: rgba(91,62,100,.12) !important; box-shadow: 0 3px 18px rgba(75,42,89,.07) !important; }
+.site nav { background: rgba(255,248,253,.94) !important; border-color: rgba(91,62,100,.12) !important; }
+.site input { background: #fff !important; color: #211a2a !important; border-color: rgba(91,62,100,.18) !important; }
+.site input::placeholder { color: #9b91a3 !important; }
+.site .s-chip { background: #f7f0fa; color: #51475b; border-color: rgba(91,62,100,.12); }
+.site .s-chip[aria-pressed='true'] { background: linear-gradient(100deg,#ff4c9a,#ed0870); color: white; border-color: transparent; box-shadow: 0 5px 14px rgba(240,24,120,.22); }
+.site .s-card { background: #fff !important; border-color: rgba(91,62,100,.13) !important; box-shadow: 0 5px 16px rgba(61,35,74,.07); }
+.site .s-card:hover { box-shadow: 0 12px 26px rgba(240,24,120,.15); }
+.site :where(.rounded-2xl, .rounded-xl, .rounded-lg) { box-shadow: 0 4px 16px rgba(61,35,74,.055); }
+.site :where(.bg-\[\#E50914\], .bg-\[var\(--accent\)]) { background-image: linear-gradient(100deg,#ff4d9b,#ed0870) !important; }
+.site :where(.shadow-\[0_0_24px_rgba\(225\,29\,42\,0\.6\)\]) { box-shadow: 0 0 24px rgba(240,24,120,.28) !important; }
+.site .s-play, .site .s-play-mini { background: #f01878 !important; }
+.site footer { background: #fff3fa !important; color: #81778b !important; border-color: rgba(91,62,100,.12) !important; }
+.site :where(.animate-pulse) { animation-duration: 1.6s; }
+@media (max-width: 640px) {
+  .site header { padding-left: 12px !important; padding-right: 12px !important; }
+  .site main { padding-left: 12px !important; padding-right: 12px !important; }
+  .site :where(.grid-cols-3, .grid-cols-4, .grid-cols-5, .grid-cols-6) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}

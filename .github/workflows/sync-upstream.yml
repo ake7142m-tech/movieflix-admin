@@ -1,0 +1,33 @@
+name: Sync from seriesjeen/web-seriesjeen-opensource
+
+# Manual only. Merging upstream automatically every hour into main can overwrite
+# local work, so changes land on a separate branch for review (open a PR from it).
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Merge upstream into a review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream "https://github.com/seriesjeen/web-seriesjeen-opensource.git" || true
+          git fetch upstream --prune
+          git switch -C sync-upstream
+          if git merge --no-edit "upstream/main"; then
+            git push --force-with-lease origin sync-upstream
+            echo "Pushed branch sync-upstream — open a pull request to review the changes."
+          else
+            echo "Merge conflict: resolve manually (git merge upstream/main)."
+            exit 1
+          fi
